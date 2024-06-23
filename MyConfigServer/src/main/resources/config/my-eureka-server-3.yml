@@ -1,0 +1,30 @@
+server:
+  port: 28083
+spring:
+  application:
+    name: my-eureka-server
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: admin
+eureka:
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enableSelfPreservation: false
+    remoteRegionUrlsWithName:
+      region-east: http://${spring.security.user.name}:${spring.security.user.password}@localhost:28081/eureka/
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    region: region-west
+    service-url:
+      zone3: http://${spring.security.user.name}:${spring.security.user.password}@localhost:28083/eureka/
+      zone4: http://${spring.security.user.name}:${spring.security.user.password}@localhost:28084/eureka/
+    availability-zones:
+      region-west: zone3, zone4
+  instance:
+    hostname: localhost
+#    preferIpAddress: true
+    metadataMap.zone: zone3

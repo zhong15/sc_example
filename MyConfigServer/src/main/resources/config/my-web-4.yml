@@ -1,0 +1,28 @@
+server:
+  port: 28094
+spring:
+  application:
+    name: my-web
+  zipkin:
+    baseUrl: http://localhost:9411/
+eureka:
+  instance:
+    metadataMap.zone: zone4
+  client:
+    security:
+      basic:
+        user: admin
+        password: admin
+#    register-with-eureka: true
+#    fetch-registry: true
+    prefer-same-zone-eureka: true
+    region: region-west
+    service-url:
+      zone3: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28083/eureka/
+      zone4: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28084/eureka/
+    availability-zones:
+      region-west: zone3, zone4
+
+logging:
+  level:
+    root: INFO

@@ -1,0 +1,60 @@
+server:
+  port: 28113
+spring:
+  application:
+    name: my-web-bridge
+  zipkin:
+    baseUrl: http://localhost:9411/
+eureka:
+  instance:
+    metadataMap.zone: zone3
+  client:
+    security:
+      basic:
+        user: admin
+        password: admin
+#    register-with-eureka: true
+#    fetch-registry: true
+    prefer-same-zone-eureka: true
+    region: region-west
+    service-url:
+      zone3: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28083/eureka/
+      zone4: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28084/eureka/
+    availability-zones:
+      region-west: zone3, zone4
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml, application/xml, application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+logging:
+  level:
+    root: INFO
+    zhong.web.MyWebInterface: debug
+ribbon.ReadTimeout: 3000
+ribbon.ConnectTimeout: 3000
+feign.hystrix.enabled: true
+hystrix:
+  shareSecurityContext: true
+  command:
+    default:
+      circuitBreaker:
+        sleepWindowInMilliseconds: 3000
+        forceClosed: true
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

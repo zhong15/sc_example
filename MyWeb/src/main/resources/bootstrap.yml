@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: my-web
+  cloud:
+    config:
+      uri: http://localhost:28071/
+      label: master

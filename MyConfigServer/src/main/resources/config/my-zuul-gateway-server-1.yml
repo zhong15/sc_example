@@ -1,0 +1,27 @@
+server:
+  port: 28101
+spring:
+  application:
+    name: my-zuul-gateway-server
+  zipkin:
+    baseUrl: http://localhost:9411/
+eureka:
+  instance:
+    metadataMap.zone: zone1
+  client:
+    security:
+      basic:
+        user: admin
+        password: admin
+    registerWithEureka: true
+    fetchRegistry: true
+    region: region-east
+    service-url:
+      zone1: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28081/eureka/
+      zone2: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:28082/eureka/
+    availability-zones:
+      region-east: zone1, zone2
+
+logging:
+  level:
+    root: INFO
