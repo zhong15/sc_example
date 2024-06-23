@@ -9,11 +9,11 @@ Spring Cloud 使用例子
 3、下载 zipkin-server-2.23.19-exec.jar  
 4、执行 java -jar zipkin-server-2.23.19-exec.jar  
 5、cd sc_example  
-6、依次运行各个子工程目录下都 start.sh/start.cmd 脚本  
+6、依次运行各个子工程目录下的 start.sh/start.cmd 脚本  
 7、项目启动完毕
 
 ### 项目停止
-1、依次运行各个子工程目录下都 kill.sh/kill.cmd 脚本  
+1、依次运行各个子工程目录下的 kill.sh/kill.cmd 脚本  
 2、停止 zipkin-server-2.23.19-exec.jar
 
 ## URL
